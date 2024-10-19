@@ -1,0 +1,4 @@
+Weronika
+
+Temat: Projekt pterodakyl 
+

@@ -31,3 +31,6 @@ class Person(models.Model):
 
         return self.name
 
+class Dog(models.Model):
+    dog_name = models.CharField(max_length=30)
+    dog_breed = models.CharField(max_length=30)

@@ -32,3 +32,22 @@ class Person(models.Model):
         return self.name
 
 
+WYBOR_PLEC = (
+    ('K', 'kobieta'),
+    ('M', 'mezczyzna'),
+    ('I', 'inne'),
+)
+
+class Stanowisko(models.Model):
+    nazwa = models.CharField(max_length=50, null=False, blank=False)
+    opis = models.TextField(blank=True)
+
+class Osoba(models.Model):
+    imie = models.CharField(max_length=50, null=False, blank=False)
+    nazwisko = models.CharField(max_length=50, null=False, blank=False)
+    plec = models.CharField(max_length=1, choices=WYBOR_PLEC, blank=False)
+    stanowisko = models.ForeignKey(Stanowisko, on_delete=models.CASCADE)
+
+
+
+

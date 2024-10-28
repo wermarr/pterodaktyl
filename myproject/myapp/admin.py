@@ -9,3 +9,9 @@ admin.site.register(Person)
 from .models import Osoba, Stanowisko
 admin.site.register(Osoba)
 admin.site.register(Stanowisko)
+
+class OsobaAdmin(admin.ModelAdmin):
+    readonly_fields = ('data_dodania',)  # Ustawienie pola jako tylko do odczytu
+
+admin.site.register(OsobaAdmin)
+

@@ -13,5 +13,6 @@ admin.site.register(Stanowisko)
 class OsobaAdmin(admin.ModelAdmin):
     readonly_fields = ('data_dodania',)  # Ustawienie pola jako tylko do odczytu
 
-admin.site.register(OsobaAdmin)
+admin.site.register(Osoba, OsobaAdmin)
+
 

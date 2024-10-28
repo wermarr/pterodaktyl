@@ -45,6 +45,9 @@ class Stanowisko(models.Model):
     nazwa = models.CharField(max_length=50, null=False, blank=False)
     opis = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.nazwa
+
 class Osoba(models.Model):
     imie = models.CharField(max_length=50, null=False, blank=False)
     nazwisko = models.CharField(max_length=50, null=False, blank=False)
@@ -52,4 +55,6 @@ class Osoba(models.Model):
     stanowisko = models.ForeignKey(Stanowisko, on_delete=models.CASCADE)
     data_dodania = models.DateField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.imie} {self.nazwisko}"
 

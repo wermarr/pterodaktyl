@@ -1,4 +1,7 @@
 from django.db import models
+from django.core.validators import RegexValidator
+
+
 
 # Create your models here.
 
@@ -63,7 +66,15 @@ class Zamieszkanie(models.Model):
     ulica = models.CharField(max_length=60, null=False, blank=False)
     numer_domu = models.IntegerField(null=False, blank=False)
     numer_mieszkania = models.IntegerField(null=True, blank=True)
-    kod_pocztowy = models.IntegerField(null=False, blank=False)
-    
+    kod_pocztowy = models.CharField(
+        max_length=6,
+        null=False,
+        blank=False,
+        validators=[RegexValidator(
+            regex=r'^\d{2}-\d{3}$',
+            message='podaj kod pocztowy w formacie xx-xxx, np. 02-987.',
+            code='invalid_postal_code'
+        )]
+    )
 
     

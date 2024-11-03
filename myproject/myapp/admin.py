@@ -14,5 +14,7 @@ class OsobaAdmin(admin.ModelAdmin):
     readonly_fields = ['data_dodania']  
 
 admin.site.register(Osoba, OsobaAdmin)
-@admin.register(Zamieszkanie)
+
+admin.site.register(Zamieszkanie)
+
 

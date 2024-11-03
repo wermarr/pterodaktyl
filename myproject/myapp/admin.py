@@ -6,7 +6,7 @@ from .models import Team, Person
 admin.site.register(Team)
 admin.site.register(Person)
 
-from .models import Osoba, Stanowisko
+from .models import Osoba, Stanowisko, Zamieszkanie
 
 admin.site.register(Stanowisko)
 
@@ -15,4 +15,5 @@ class OsobaAdmin(admin.ModelAdmin):
 
 admin.site.register(Osoba, OsobaAdmin)
 
+admin.site.register(Zamieszkanie)
 

@@ -58,3 +58,10 @@ class Osoba(models.Model):
     def __str__(self):
         return f"{self.imie} {self.nazwisko}"
 
+class Zamieszkanie(models.Model): 
+    miasto = models.CharField(max_length=60, null=False, blank=False)
+    ulica = models.CharField(max_length=60, null=False, blank=False)
+    numer_domu = models.IntegerField(null=False, blank=False)
+    numer_mieszkania = models.IntegerField(null=True, blank=True)
+    kod pocztowy = models.IntegerChoices(max_length=5, null=False, blank=False)
+    

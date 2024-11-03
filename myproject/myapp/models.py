@@ -77,6 +77,10 @@ class Zamieszkanie(models.Model):
         )]
     )
 
+    def __str__(self):
+        return f"{self.ulica} {self.numer_domu} {self.miasto}"
+
+
     
 class Zwierze(models.Model):
     class wybor_zwierze(models.IntegerChoices):
@@ -86,3 +90,7 @@ class Zwierze(models.Model):
         CHOMIK = 4
 
     suit = models.IntegerField(choices=wybor_zwierze.choices)
+
+def __str__(self):
+        return self.wybor_zwierze
+        

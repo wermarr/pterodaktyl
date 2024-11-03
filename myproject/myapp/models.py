@@ -78,3 +78,11 @@ class Zamieszkanie(models.Model):
     )
 
     
+class Zwierze(models.Model):
+    class wybor_zwierze(models.IntegerChoices):
+        PIES = 1
+        KOT = 2
+        KANAREK = 3
+        CHOMIK = 4
+
+    suit = models.IntegerField(choices=wybor_zwierze.choices)

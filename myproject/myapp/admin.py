@@ -17,4 +17,8 @@ admin.site.register(Osoba, OsobaAdmin)
 
 admin.site.register(Zamieszkanie)
 
+from .models import Zwierze
+
+admin.site.register(Zwierze)
+
 

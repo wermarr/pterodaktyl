@@ -92,5 +92,5 @@ class Zwierze(models.Model):
     suit = models.IntegerField(choices=wybor_zwierze.choices)
 
 def __str__(self):
-        return self.wybor_zwierze
+        return self.wybor_zwierze(self.suit).label
         

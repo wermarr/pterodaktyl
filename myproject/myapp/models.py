@@ -63,5 +63,6 @@ class Zamieszkanie(models.Model):
     ulica = models.CharField(max_length=60, null=False, blank=False)
     numer_domu = models.IntegerField(null=False, blank=False)
     numer_mieszkania = models.IntegerField(null=True, blank=True)
-    kod pocztowy = models.IntegerChoices(max_length=5, null=False, blank=False)
+    kod_pocztowy = models.IntegerChoices(max_length=5, null=False, blank=False)
+    
     

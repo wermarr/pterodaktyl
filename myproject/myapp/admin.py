@@ -13,6 +13,11 @@ admin.site.register(Stanowisko)
 class OsobaAdmin(admin.ModelAdmin):
     readonly_fields = ['data_dodania']  
     list_display = ["nazwisko", "imie", "stanowisko"]
+    
+    @admin.display(description='Stanowisko (id)')
+    def stanowisko_z_id(self, obj):
+        return f"{obj.stanowisko} ({obj.stanowisko.id})"
+
 
 admin.site.register(Osoba, OsobaAdmin)
 

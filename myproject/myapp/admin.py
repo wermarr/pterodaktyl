@@ -12,7 +12,7 @@ admin.site.register(Stanowisko)
 
 class OsobaAdmin(admin.ModelAdmin):
     readonly_fields = ['data_dodania']  
-    list_display = ["nazwisko", "imie", "stanowisko"]
+    list_display = ["nazwisko", "imie", "stanowisko_z_id", "data_dodania"]
     
     @admin.display(description='Stanowisko (id)')
     def stanowisko_z_id(self, obj):

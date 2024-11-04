@@ -8,11 +8,16 @@ admin.site.register(Person)
 
 from .models import Osoba, Stanowisko, Zamieszkanie
 
-admin.site.register(Stanowisko)
+class StanowiskoAdmin(admin.ModelAdmin):
+    list_display = ('nazwa', 'opis') 
+    search_fields = ('nazwa',)  
+
+admin.site.register(Stanowisko, StanowiskoAdmin)
 
 class OsobaAdmin(admin.ModelAdmin):
     readonly_fields = ['data_dodania']  
     list_display = ["nazwisko", "imie", "stanowisko_z_id", "data_dodania"]
+    list_filter = ('stanowisko', 'data_dodania')  
     
     @admin.display(description='Stanowisko (id)')
     def stanowisko_z_id(self, obj):

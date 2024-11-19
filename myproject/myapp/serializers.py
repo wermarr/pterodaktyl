@@ -2,6 +2,7 @@
 
 from rest_framework import serializers
 from .models import Article, Author
+from myapp.models import Person
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:

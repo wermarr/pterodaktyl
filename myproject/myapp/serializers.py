@@ -14,6 +14,14 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'bio']
 
 class PersonSerializer(serializers.Serializer):
+      def validate_name(self, value):
+
+        if not value.istitle():
+            raise serializers.ValidationError(
+                "Nazwa osoby powinna rozpoczynać się wielką literą!",
+            )
+        return value
+
 
     # pole tylko do odczytu, tutaj dla id działa też autoincrement
     id = serializers.IntegerField(read_only=True)

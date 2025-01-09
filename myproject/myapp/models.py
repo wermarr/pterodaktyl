@@ -29,6 +29,7 @@ class Person(models.Model):
     shirt_size = models.CharField(max_length=1, choices=SHIRT_SIZES, default=SHIRT_SIZES[0][0])
     month_added = models.IntegerField(choices=MONTHS.choices, default=MONTHS.choices[0][0])
     team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL)
+    pseudonim = models.CharField(max_length=50, default="-")
 
     def __str__(self):
 

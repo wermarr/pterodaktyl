@@ -1,24 +1,14 @@
 # myapp/serializers.py
 
 from rest_framework import serializers
-from .models import Article, Author
-
-class ArticleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Article
-        fields = ['id', 'title', 'content', 'published_date']
-
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = ['id', 'name', 'bio']
+from .models import Person, Team, MONTHS, SHIRT_SIZES, Stanowisko, Osoba, Zamieszkanie
 
 class PersonSerializer(serializers.Serializer):
 
-    # pole tylko do odczytu, tutaj dla id działa też autoincrement
+   
     id = serializers.IntegerField(read_only=True)
 
-    # pole wymagane
+
     name = serializers.CharField(required=True)
 
     # pole mapowane z klasy modelu, z podaniem wartości domyślnych
@@ -28,10 +18,10 @@ class PersonSerializer(serializers.Serializer):
     shirt_size = serializers.ChoiceField(choices=SHIRT_SIZES, default=SHIRT_SIZES[0][0])
     miesiac_dodania = serializers.ChoiceField(choices=MONTHS.choices, default=MONTHS.choices[0][0])
 
-    # odzwierciedlenie pola w postaci klucza obcego
-    # przy dodawaniu nowego obiektu możemy odwołać się do istniejącego poprzez inicjalizację nowego obiektu
-    # np. team=Team({id}) lub wcześniejszym stworzeniu nowej instancji tej klasy
+   
     team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all())
+
+    pseudonim = serializers.CharField(required = False)
 
     # przesłonięcie metody create() z klasy serializers.Serializer
     def create(self, validated_data):
@@ -43,5 +33,46 @@ class PersonSerializer(serializers.Serializer):
         instance.shirt_size = validated_data.get('shirt_size', instance.shirt_size)
         instance.miesiac_dodania = validated_data.get('miesiac_dodania', instance.miesiac_dodania)
         instance.team = validated_data.get('team', instance.team)
+        instance.pseudonim = validated_data.get("pseudonim", instance.pseudonim)
         instance.save()
         return instance
+    
+
+# class PersonModelSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         # musimy wskazać klasę modelu
+#         model = Person
+#         # definiując poniższe pole możemy określić listę właściwości modelu,
+#         # które chcemy serializować
+#         fields = ['id', 'name', 'miesiac_dodania', 'shirt_size', 'team', 'pseudonim']
+#         # definicja pola modelu tylko do odczytu
+#         read_only_fields = ['id']
+    
+class StanowiskoSerializer(serializers.Serializer):
+    nazwa = serializers.CharField(max_length=80)
+    opis = serializers.CharField()
+
+
+    def create(self, validated_data):
+        return Stanowisko.objects.create(**validated_data) #gwiazdki oznaczają ze argumentow bedzie duzo, dwie oznaczaja juz slownik 
+    
+    def update(self, instance, validated_data):
+        instance.nazwa = validated_data.get('nazwa', instance.nazwa)
+        instance.opis = validated_data.get('opis', instance.opis)
+        instance.save()
+        return instance
+
+class TeamSerializer(serializers.ModelSerializer):
+    model = Team 
+    fields = ['name', 'country']
+
+
+class OsobaSerializer(serializers.ModelSerializer):
+    model = Osoba
+    fields = ['imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania']
+    read_only_fields = ['data_dodania']
+
+
+class ZamieszkanieSerializer(serializers.ModelSerializer):
+    model = Zamieszkanie
+    fields = ['miasto', 'ulica', 'numer_domu', 'numer_mieszkania', 'kod_pocztowy']

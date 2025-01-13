@@ -23,6 +23,14 @@ class PersonSerializer(serializers.Serializer):
 
     pseudonim = serializers.CharField(required = False)
 
+    def validate_name(self, value):
+
+        if not value.istitle():
+            raise serializers.ValidationError(
+                "Nazwa osoby powinna rozpoczynać się wielką literą!",
+            )
+        return value
+
     # przesłonięcie metody create() z klasy serializers.Serializer
     def create(self, validated_data):
         return Person.objects.create(**validated_data)
@@ -69,7 +77,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
 class OsobaSerializer(serializers.ModelSerializer):
     model = Osoba
-    fields = ['imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania']
+    fields = ['imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania', 'id']
     read_only_fields = ['data_dodania']
 
 

@@ -16,7 +16,7 @@ class PersonSerializer(serializers.Serializer):
     # w pliku models.py SHIRT_SIZES oraz MONTHS zostały wyniesione jako stałe do poziomu zmiennych skryptu
     # (nie wewnątrz modelu)
     shirt_size = serializers.ChoiceField(choices=SHIRT_SIZES, default=SHIRT_SIZES[0][0])
-    miesiac_dodania = serializers.ChoiceField(choices=MONTHS.choices, default=MONTHS.choices[0][0])
+    month_added = serializers.ChoiceField(choices=MONTHS.choices, default=MONTHS.choices[0][0])
 
    
     team = serializers.PrimaryKeyRelatedField(queryset=Team.objects.all())
@@ -39,7 +39,7 @@ class PersonSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.shirt_size = validated_data.get('shirt_size', instance.shirt_size)
-        instance.miesiac_dodania = validated_data.get('miesiac_dodania', instance.miesiac_dodania)
+        instance.month_added = validated_data.get('month_added', instance.month_added)
         instance.team = validated_data.get('team', instance.team)
         instance.pseudonim = validated_data.get("pseudonim", instance.pseudonim)
         instance.save()
@@ -52,13 +52,15 @@ class PersonSerializer(serializers.Serializer):
 #         model = Person
 #         # definiując poniższe pole możemy określić listę właściwości modelu,
 #         # które chcemy serializować
-#         fields = ['id', 'name', 'miesiac_dodania', 'shirt_size', 'team', 'pseudonim']
+#         fields = ['id', 'name', 'month_added', 'shirt_size', 'team', 'pseudonim']
 #         # definicja pola modelu tylko do odczytu
 #         read_only_fields = ['id']
     
 class StanowiskoSerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only = True)
     nazwa = serializers.CharField(max_length=80)
     opis = serializers.CharField()
+    
 
 
     def create(self, validated_data):
@@ -77,7 +79,7 @@ class TeamSerializer(serializers.ModelSerializer):
 
 class OsobaSerializer(serializers.ModelSerializer):
     model = Osoba
-    fields = ['imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania', 'id']
+    fields = ['imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania', ]
     read_only_fields = ['data_dodania']
 
 

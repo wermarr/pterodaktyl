@@ -78,9 +78,28 @@ class TeamSerializer(serializers.ModelSerializer):
 
 
 class OsobaSerializer(serializers.ModelSerializer):
+
+
+    def validate_imie(self, value):
+        if not value.isalpha():
+            raise serializers.ValidationError(
+                "Pole imię musi zawierać tylko litery",
+            )
+        return value
+    
+    def validate_nazwisko(self, value):
+        if not value.isalpha():
+            raise serializers.ValidationError(
+                "Pole nazwisko musi zawierać tylko litery",
+            )
+        return value
+
+    
+
+
     model = Osoba
     fields = ['imie', 'nazwisko', 'plec', 'stanowisko', 'data_dodania', ]
-    read_only_fields = ['data_dodania']
+    read_only_fields = ['id']
 
 
 class ZamieszkanieSerializer(serializers.ModelSerializer):

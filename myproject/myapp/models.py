@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.timezone import now 
@@ -58,7 +59,8 @@ class Osoba(models.Model):
     nazwisko = models.CharField(max_length=50, null=False, blank=False)
     plec = models.CharField(max_length=1, choices=WYBOR_PLEC, blank=False)
     stanowisko = models.ForeignKey(Stanowisko, on_delete=models.CASCADE)
-    data_dodania = models.DateField(default=now)
+    data_dodania = models.DateField(default=date.today, blank=False, null=False)
+    
 
     class Meta: 
         ordering = ['nazwisko']

@@ -6,8 +6,8 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('myapp', '0002_dog'),
-    ]
+        ('myapp', '0001_initial'),
+]
 
     operations = [
         migrations.DeleteModel(

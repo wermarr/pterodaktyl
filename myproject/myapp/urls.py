@@ -8,6 +8,5 @@ urlpatterns = [
     path('osoby/<int:pk>/', views.osoba_details),
     path('osoby/search/<str:substring>/', views.osoba_search),
     path('stanowiska/', views.stanowisko_list),
-    path('stanowiska/<int:pk>/', views.stanowisko_detail),
+    path('stanowiska/<int:pk>/', views.stanowisko_detail),    
 ]
-

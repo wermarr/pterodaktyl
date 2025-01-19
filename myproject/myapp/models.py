@@ -34,8 +34,7 @@ class Person(models.Model):
     pseudonim = models.CharField(max_length=50, default="-")
 
     def __str__(self):
-
-        return self.name
+        return f"Person : {self.name}, dodana w {self.month_added}, o rozmiarze koszuli {self.shirt_size}." 
 
 class Dog(models.Model):
     dog_name = models.CharField(max_length=30)
@@ -51,8 +50,7 @@ class Stanowisko(models.Model):
     nazwa = models.CharField(max_length=50, null=False, blank=False)
     opis = models.TextField(blank=True)
 
-    def __str__(self):
-        return self.nazwa
+    
 
 class Osoba(models.Model):
     imie = models.CharField(max_length=50, null=False, blank=False)

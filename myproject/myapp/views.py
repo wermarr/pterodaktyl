@@ -123,3 +123,10 @@ def welcome_view(request):
         Aktualna data i czas na serwerze: {now}.
         </body></html>"""
     return HttpResponse(html)
+
+def person_list_html(request):
+    # pobieramy wszystkie obiekty Person z bazy poprzez QuerySet
+    persons = Person.objects.all()
+    return render(request,
+                  "myapp/person/list.html",
+                  {'persons': persons})

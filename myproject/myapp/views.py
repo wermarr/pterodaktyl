@@ -119,7 +119,7 @@ def welcome_view(request):
     now = datetime.datetime.now()
     html = f"""
         <html><body>
-        Witaj użytkowniku! </br>
+        Elo elo </br>
         Aktualna data i czas na serwerze: {now}.
         </body></html>"""
     return HttpResponse(html)

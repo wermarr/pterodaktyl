@@ -142,3 +142,17 @@ def person_detail_html(request, id):
     return render(request,
                   "myapp/person/detail.html",
                   {'person': person})
+
+def team_list_html(request):
+    teams = Team.objects.all()
+    return render(request, "myapp/team/team_list.html", {'teams' : teams} )
+
+def team_detail_html(request, id):
+    try: 
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        raise Http404('obiekt team o podanym id nie istnieje')
+    
+    return render(request, 
+                  "myapp/team/team_detail.html", 
+                  {'team' : team})

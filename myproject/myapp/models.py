@@ -1,6 +1,7 @@
 from datetime import date
 from django.db import models
 from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 from django.utils.timezone import now 
 
@@ -59,6 +60,7 @@ class Osoba(models.Model):
     plec = models.CharField(max_length=1, choices=WYBOR_PLEC, blank=False)
     stanowisko = models.ForeignKey(Stanowisko, on_delete=models.CASCADE)
     data_dodania = models.DateField(default=date.today, blank=False, null=False)
+    wlasciciel = models.ForeignKey(User, on_delete=models.CASCADE, null = True, blank = True)
     
 
     class Meta: 

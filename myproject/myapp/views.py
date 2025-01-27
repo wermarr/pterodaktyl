@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Osoba, Person, Stanowisko, Team
 from .serializers import OsobaSerializer, PersonSerializer, StanowiskoSerializer
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 import datetime
 
 # określamy dostępne metody żądania dla tego endpointu
@@ -130,3 +130,15 @@ def person_list_html(request):
     return render(request,
                   "myapp/person/list.html",
                   {'persons': persons})
+
+
+def person_detail_html(request, id):
+    # pobieramy konkretny obiekt Person
+    try:
+        person = Person.objects.get(id=id)
+    except Person.DoesNotExist:
+        raise Http404("Obiekt Person o podanym id nie istnieje")
+
+    return render(request,
+                  "myapp/person/detail.html",
+                  {'person': person})

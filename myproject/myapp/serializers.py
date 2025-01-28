@@ -74,8 +74,9 @@ class StanowiskoSerializer(serializers.Serializer):
         return instance
 
 class TeamSerializer(serializers.ModelSerializer):
-    model = Team 
-    fields = ['name', 'country']
+    class Meta:
+        model = Team 
+        fields = ['name', 'country']
 
 
 class OsobaSerializer(serializers.ModelSerializer):

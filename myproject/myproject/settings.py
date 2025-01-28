@@ -132,3 +132,8 @@ INTERNAL_IPS = [
 ]
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'myapp.permissions.CustomDjangoModelPermissions',
+    )
+}

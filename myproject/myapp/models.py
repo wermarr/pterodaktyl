@@ -65,6 +65,9 @@ class Osoba(models.Model):
 
     class Meta: 
         ordering = ['nazwisko']
+        permissions = [
+            ('view_person_other_owner',  'pozwala zobaczyc modele osoba innych wlascicieli'),
+        ]
 
     def __str__(self):
         return f"{self.imie} {self.nazwisko}"
